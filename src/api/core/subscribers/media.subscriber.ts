@@ -1,5 +1,3 @@
-require('module-alias/register');
-
 import * as Dayjs from 'dayjs';
 
 import { CacheService } from '@services/cache.service';

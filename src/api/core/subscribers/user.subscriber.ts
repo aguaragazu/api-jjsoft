@@ -1,5 +1,3 @@
-require('module-alias/register');
-
 import * as Dayjs from 'dayjs';
 import { EventSubscriber, EntitySubscriberInterface, InsertEvent, UpdateEvent, RemoveEvent } from 'typeorm';
 import { User } from '@models/user.model';

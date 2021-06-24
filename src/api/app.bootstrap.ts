@@ -1,4 +1,4 @@
-require('module-alias/register');
+import 'module-alias/register';
 
 import { TYPEORM } from '@config/environment.config';
 import { Database } from '@config/database.config';
