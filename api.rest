@@ -1,0 +1,116 @@
+@hostname = dylsapi.aguara.jjsoftsistemas.com
+@host = {{hostname}}
+@baseUrl = https://{{host}}/api/v1
+@contentType = application/json
+@origin = http://localhost:5000
+@authToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MGE0YTZmMDEyN2MwYzE4YjJjYjIzNDIiLCJpYXQiOjE2MjE0MDM1ODQsImV4cCI6MTYyMTQwNTM4NCwidHlwZSI6ImFjY2VzcyJ9.v_JSwj_LS5jR2wtNmiqcZUJXKrz32bZPXJ8XJqViQYQ
+@refreshToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZjYxYjIxYjEyMGEyODU0ZjBjOTQxZjQiLCJpYXQiOjE2MDAyMzgxMDcsImV4cCI6MTYwMjgzMDEwNywidHlwZSI6InJlZnJlc2gifQ.MKLlhA_Ub_2E3BgCFlwhC3f3FFFAgW5OuJBFp6AzhI0
+@confirmationCode = wZlfrMSLGx0kRWRzeeIHSeOoUni77aZCPxqNG8WgF8361Wvx32pnAMTz281SziIxjKbLEhJA6zpcYne9E05svf5Sl18ZVoTorgefh91DnTdXuWq4vLgExvrzU0wXtRlmAnugTv85hCwu5PsLY4y3VEp9SBqFCNV4l3AypKzRDy66WMN4n5x1OlTpZaZkeneKK7kLD4JkW6TOzJ9YC6yK2EVrgWdfVJQifkVEfTqA0uQ0WTR12OYr91QnjWZKgitU
+###
+GET {{baseUrl}}/status HTTP/1.1
+content-type: {{contentType}}
+origin: {{origin}}
+
+###
+POST {{baseUrl}}/auth/register HTTP/1.1
+content-type: {{contentType}}
+origin: {{origin}}
+
+{
+  "username": "john-smith",
+  "email": "contacto@john-smith.com",
+  "password": "lo1Rs9#q"
+}
+
+###
+POST {{baseUrl}}/auth/login HTTP/1.1
+content-type: {{contentType}}
+origin: {{origin}}
+
+
+{
+  "email": "contact@john-doe.com",
+  "password": "lo1Rs9#q"
+}
+
+###
+POST {{baseUrl}}/auth/logout HTTP/1.1
+content-type: {{contentType}}
+origin: {{origin}}
+Authorization: Bearer {{authToken}}
+
+{
+  "refreshToken": "{{refreshToken}}"
+}
+
+###
+GET {{baseUrl}}/auth/request-password?email=aguara34@yopmail.com HTTP/1.1
+content-type: {{contentType}}
+origin: {{origin}}
+
+{
+  "email": "aguara34@yopmail.com"
+}
+
+###
+GET {{baseUrl}}/users/60a1cfdf04c60c008cb60172 HTTP/1.1
+Content-Type: {{contentType}}
+Authorization: Bearer {{authToken}}
+
+###
+GET {{baseUrl}}/apidocs HTTP/1.1
+Content-Type: {{contentType}}
+
+
+###
+GET {{baseUrl}}/auth/confirm?email=aguara34@yopmail.com&token=Sqtw6zEfQAF4nfUV6IXUcFSO4iHskmPaWLBZWeDEyCZpAijAKv5g3OJH2xgMydjB3seQoQbFCrodlip2jR4MTP07BkrhM5PEsWoRFp1lfNk5s4vfKrlObe9FPy9TisNugvJ8EIaGK0edEA9mjS4AXVTRL5BlVwuYpXGIeGvDz5TJyw2yLkfrGn9H0dFffPUkUQGFtOJeORkRms4hoHklO9Q6szu97vW1xiqniLjIkpUozX7Bwuar1RfMEoxHTOUA HTTP/1.1
+content-type: {{contentType}}
+
+###
+GET {{baseUrl}}/users HTTP/1.1
+Content-Type: {{contentType}}
+Authorization: Bearer {{authToken}}
+
+###
+GET {{baseUrl}}/tasks HTTP/1.1
+Content-Type: {{contentType}}
+Authorization: Bearer {{authToken}}
+
+###
+GET {{baseUrl}}/tasks?completed=false HTTP/1.1
+Content-Type: {{contentType}}
+Authorization: Bearer {{authToken}}
+
+###
+POST {{baseUrl}}/tasks HTTP/1.1
+Content-Type: {{contentType}}
+Authorization: Bearer {{authToken}}
+
+{
+  "description": "DOS TAREA USER"
+}
+
+###
+PATCH {{baseUrl}}/tasks/60a1d0d204c60c008cb6017a HTTP/1.1
+Content-Type: {{contentType}}
+Authorization: Bearer {{authToken}}
+
+{
+  "description": "Cuatro TAREA USER",
+  "completed": true
+}
+
+###
+GET {{baseUrl}}/tasks/60a1d0d204c60c008cb6017a HTTP/1.1
+Content-Type: {{contentType}}
+Authorization: Bearer {{authToken}}
+
+###
+GET {{baseUrl}}/tasks/5f614a22aab9305708e392ed HTTP/1.1
+Content-Type: {{contentType}}
+Authorization: Bearer {{authToken}}
+
+###
+DELETE {{baseUrl}}/tasks/5f61545c28787d342cce2704 HTTP/1.1
+Content-Type: {{contentType}}
+Authorization: Bearer {{authToken}}
