@@ -1,8 +1,7 @@
-require('module-alias/register');
-
 import * as Dayjs from 'dayjs';
 import * as Jwt from 'jwt-simple';
-import * as Bcrypt from 'bcrypt';
+import { hash, compare, genSalt } from 'bcryptjs';
+import { v4 as uuidv4 } from 'uuid';
 import { Entity, PrimaryGeneratedColumn, Column, BeforeUpdate, AfterLoad, BeforeInsert, OneToMany, OneToOne, JoinColumn } from 'typeorm';
 import { badImplementation } from '@hapi/boom';
 
@@ -15,8 +14,8 @@ import { IModel } from '@interfaces';
 @Entity()
 export class User implements IModel {
 
-  @PrimaryGeneratedColumn()
-  id: number;
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
   @Column({
     length: 32,
@@ -30,7 +29,7 @@ export class User implements IModel {
 
   @Column({
     length: 128,
-    unique: true
+    unique: true,
   })
   email: string;
 
@@ -99,14 +98,19 @@ export class User implements IModel {
     this.temporaryPassword = this.password;
   }
 
+
   @BeforeInsert()
   @BeforeUpdate()
   async hashPassword(): Promise<string|boolean> {
     try {
+      this.id = uuidv4();
       if (this.temporaryPassword === this.password) {
         return true;
       }
-      this.password = await Bcrypt.hash(this.password, 10);
+      const salt = await genSalt(10);
+      const hashed = await hash(this.password, salt);
+      this.password = hashed;
+
       return true;
     } catch (error) {
       throw badImplementation();
@@ -119,7 +123,8 @@ export class User implements IModel {
    * @param password
    */
   async passwordMatches(password: string): Promise<boolean> {
-    return await Bcrypt.compare(password, this.password);
+    
+    return await compare(password, this.password);
   }
 
   /**

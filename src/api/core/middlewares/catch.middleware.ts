@@ -72,7 +72,7 @@ class Catch {
    * @param next Callback function
    */
    log(err: IHTTPError, req: IRequest, res: Response, next: (e: IHTTPError, req, res) => void): void {
-    const { user } = req as { user: { id: number } };
+    const { user } = req as { user: { id: string } };
     if (err.statusCode >= 500) {
       Logger.log('error', `${req.headers['x-forwarded-for'] as string || req.connection.remoteAddress} HTTP/${req.httpVersion} ${err.statusCode} ${req.method} ${req.url} - ${err.message} (#${user ? user.id : 'unknown'}) : ${err.stack ? '\n  ' + err.stack : ''} ${req.body ? '\n  Payload :' + JSON.stringify(req.body) : ''}`);
     } else {

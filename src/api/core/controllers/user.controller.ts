@@ -38,7 +38,7 @@ class UserController {
   @Safe()
   async get(req: IUserRequest, res: IResponse): Promise<void> {
     const repository = getCustomRepository(UserRepository);
-    res.locals.data = await repository.one(parseInt(req.params.userId, 10));
+    res.locals.data = await repository.one(req.params.userId);
   }
 
   /**

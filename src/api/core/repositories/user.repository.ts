@@ -20,10 +20,10 @@ export class UserRepository extends Repository<User>  {
    * @param id - The id of user
    *
    */
-  async one(id: number): Promise<User> {
+  async one(id: string): Promise<User> {
 
     const repository = getRepository(User);
-    const options: { id: number } = omitBy({ id }, isNil) as { id: number };
+    const options: { id: string } = omitBy({ id }, isNil) as { id: string };
 
     const user = await repository.findOne({
       where: options
