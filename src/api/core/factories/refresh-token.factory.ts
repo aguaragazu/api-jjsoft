@@ -4,6 +4,7 @@ import { randomBytes } from 'crypto';
 import { User } from '@models/user.model';
 import { RefreshToken } from '@models/refresh-token.model';
 import { REFRESH_TOKEN } from '@config/environment.config';
+import { TOKENTYPE } from '@enums';
 
 /**
  * @description
@@ -18,6 +19,6 @@ export class RefreshTokenFactory {
   static get(user: User): RefreshToken {
     const token = `${user.id}.${randomBytes(40).toString('hex')}`;
     const expires = Dayjs().add(REFRESH_TOKEN.DURATION, REFRESH_TOKEN.UNIT).toDate();
-    return new RefreshToken( token, user, expires );
+    return new RefreshToken( token, user, expires, TOKENTYPE.REFRESH );
   }
 }

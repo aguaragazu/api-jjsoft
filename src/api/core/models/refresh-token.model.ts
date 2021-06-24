@@ -1,7 +1,7 @@
-require('module-alias/register');
-
 import { Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinColumn } from 'typeorm';
 import { User } from '@models/user.model';
+import { TOKENTYPE } from '@enums';
+import { TokenType } from '@types';
 
 @Entity()
 export class RefreshToken {
@@ -22,15 +22,26 @@ export class RefreshToken {
   @Column()
   expires: Date;
 
+  @Column()
+  blacklisted: boolean;
+
+  @Column({
+    type: 'enum',
+    enum: TOKENTYPE
+  })
+  type: TokenType;
+
   /**
    *
    * @param token
    * @param user
    * @param expires
    */
-  constructor(token: string, user: User, expires: Date) {
+  constructor(token: string, user: User, expires: Date, type: TokenType) {
     this.token = token;
     this.expires = expires;
     this.user = user;
+    this.blacklisted = false;
+    this.type = type;
   }
 }

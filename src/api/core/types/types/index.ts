@@ -14,6 +14,7 @@ import { Status } from './status.type';
 import { VideoMimeType } from './video-mime-type.type';
 import { EnvOauth, EnvAccessToken, EnvMemoryCache, EnvSSL, EnvTypeorm, EnvLog, EnvUpload, EnvImageScaling, EnvRefreshToken } from './environment-cluster.type';
 import { MimeType } from './mime-type.type';
+import { TokenType } from './token.type';
 
 export {
   ArchiveMimeType,
@@ -39,5 +40,6 @@ export {
   EnvLog,
   EnvUpload,
   EnvImageScaling,
-  EnvRefreshToken
+  EnvRefreshToken,
+  TokenType
 }

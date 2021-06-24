@@ -10,6 +10,7 @@ import { MEDIA_TYPE } from './media-type.enum';
 import { ROLE } from './role.enum';
 import { STATUS } from './status.enum';
 import { VIDEO_MIME_TYPE } from './video-mime-type.enum';
+import { TOKENTYPE } from './token-type.enum';
 
 import { MIME_TYPE, MIME_TYPE_LIST } from './mime-type.enum';
 
@@ -27,5 +28,6 @@ export {
   MIME_TYPE_LIST,
   ROLE,
   STATUS,
+  TOKENTYPE,
   VIDEO_MIME_TYPE
 }
