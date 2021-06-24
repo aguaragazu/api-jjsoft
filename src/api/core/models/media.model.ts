@@ -1,7 +1,5 @@
-require('module-alias/register');
-
 import * as Dayjs from 'dayjs';
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from 'typeorm';
 
 import { MIME_TYPE, FIELDNAME } from '@enums';
 import { User } from '@models/user.model';
@@ -12,8 +10,8 @@ import { MimeType, Fieldname } from '@types';
 @Entity()
 export class Media implements IModel {
 
-  @PrimaryGeneratedColumn()
-  id: number;
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
   @Column({
     type: 'enum',
@@ -44,6 +42,7 @@ export class Media implements IModel {
   @ManyToOne(type => User, user => user.medias, {
     onDelete: 'CASCADE' // Remove all documents when user is deleted
   })
+  @JoinColumn({ name: 'owner' })
   owner: User;
 
   @Column({

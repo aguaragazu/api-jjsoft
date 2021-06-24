@@ -11,5 +11,5 @@ export interface IMedia {
   mimetype: MimeType;
   originalname?: string;
   fieldname?: string;
-  owner?: number | User | DeepPartial<User>;
+  owner?: string | User | DeepPartial<User>;
 }
